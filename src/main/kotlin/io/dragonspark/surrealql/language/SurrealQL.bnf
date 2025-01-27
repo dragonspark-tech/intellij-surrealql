@@ -1,0 +1,20 @@
+{
+  parserClass = "io.dragonspark.surrealql.language.parser.SurrealQLParser"
+
+  extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="SurrealQL"
+  psiImplClassSuffix="Impl"
+  psiPackage="io.dragonspark.surrealql.language.psi"
+  psiImplPackage="io.dragonspark.surrealql.language.psi.impl"
+
+  elementTypeHolderClass="io.dragonspark.surrealql.language.psi.SurrealQLTypes"
+  elementTypeClass="io.dragonspark.surrealql.language.psi.SurrealQLElementType"
+  tokenTypeClass="io.dragonspark.surrealql.language.psi.SurrealQLTokenType"
+}
+
+surqlFile ::= item_*
+
+private item_ ::= (rebuild| " " |COMMENT|CRLF)
+rebuild ::= REBUILD rebuild_statement
+rebuild_statement ::= ("INDEX" ["IF EXISTS"] name "ON" ["TABLE"] table)
